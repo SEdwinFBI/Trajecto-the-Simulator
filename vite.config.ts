@@ -4,12 +4,14 @@ import path from "path";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+const isProd = process.env.NODE_ENV === 'production';
 
 export default defineConfig({
   server:{
     host:"192.168.0.104"
   },
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  base: isProd ? '/Trajecto-the-Simulator/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './app'), 
