@@ -13,7 +13,7 @@ const InputComponent:FC<propInput> = ({label,type,captureValue,simulatorKey: sim
   return (
     <div className='flex flex-col w-full p-3 bg-blue-950 rounded-2xl'>
         <label htmlFor={label.trim()}>{label}</label>
-        <input value={value} className='bg-blue-400 rounded-xl focus:outline-1 text-gray-700 text-end' type={type}  id={label.trim()} onChange={(e)=>captureValue((prev)=>({
+        <input value={value} className='bg-blue-900 rounded-xl focus:outline-1 text-gray-200 text-end' type={type}  id={label.trim()} onChange={(e)=>captureValue((prev)=>({
             ...prev,
             [simulatorType]: e.target.value
         }))} />
