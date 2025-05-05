@@ -12,7 +12,7 @@ import "./app.css";
 
 
 export const links: Route.LinksFunction = () => [
-  { rel: "icon", href: "/public/favicon.png",sizes: "32x32", type: "image/png" },
+  { rel: "icon", href: "/favicon.png",sizes: "32x32", type: "image/png" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
