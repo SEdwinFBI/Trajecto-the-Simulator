@@ -1,5 +1,5 @@
 import type { RootState } from '@/store/store';
-import { calcularTrayectoriaParabolica } from '@/utils/calculos';
+import { calcularTrayectoriaHorizontal, calcularTrayectoriaParabolica } from '@/utils/calculos';
 import React, { useEffect, useMemo, useRef, useState, type FC } from 'react'
 import { useSelector } from 'react-redux';
 
@@ -29,30 +29,42 @@ const Trajecto: FC<propsTrajecto> = () => {
 
   //  cálculos de trayectoria
   useEffect(() => {
-    const { puntos: p, alturaMaxima: hf, distanciaMaxima: df, tiempoVuelo: tf, velocidadFinal: vf } = calcularTrayectoriaParabolica(
-      parameters.grade,
-      parameters.speed,
-      parameters.kg
-    );
-    setPuntos(p);
-    setAlturaMaxima(hf);
-    setDistanciaMaxima(df);
-    setTiempoVuelo(tf);
-    setVelocidadFinal(vf)
-    setTipoMovimiento(parameters.type)
-
-  
+    if (parameters.grade != 0) {
+      const { puntos: p, alturaMaxima: hf, distanciaMaxima: df, tiempoVuelo: tf, velocidadFinal: vf } = calcularTrayectoriaParabolica(
+        parameters.grade,
+        parameters.speed,
+        parameters.kg
+      );
+      setPuntos(p);
+      setAlturaMaxima(hf);
+      setDistanciaMaxima(df);
+      setTiempoVuelo(tf);
+      setVelocidadFinal(vf)
+      setTipoMovimiento(parameters.type)
+    }
+    else {
+      const { puntos: p, alturaMaxima: hf, distanciaMaxima: df, tiempoVuelo: tf, velocidadFinal: vf } = calcularTrayectoriaHorizontal(
+        parameters.kg,
+        parameters.speed,
+      );
+      setPuntos(p);
+      setAlturaMaxima(hf);
+      setDistanciaMaxima(df);
+      setTiempoVuelo(tf);
+      setVelocidadFinal(vf)
+      setTipoMovimiento(parameters.type)
+    }
   }, [parameters])
 
   // iniciales
   const { escala, width, height } = useMemo(() => {
-    const parentWidth = 600; 
+    const parentWidth = 600;
     const parentHeight = 400;
-    
+
     const margen = 40;
     const espacioDisponibleX = parentWidth - margen * 2;
     const espacioDisponibleY = parentHeight - margen * 2;
-    
+
     let escalaBase = 1;
     if (distanciaMaxima > 0 && alturaMaxima > 0) {
       escalaBase = Math.min(
@@ -60,7 +72,7 @@ const Trajecto: FC<propsTrajecto> = () => {
         espacioDisponibleY / alturaMaxima
       );
     }
-    
+
     return {
       escala: escalaBase * 1.07,
       width: parentWidth,
@@ -142,7 +154,7 @@ const Trajecto: FC<propsTrajecto> = () => {
     frameId.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frameId.current);
   }, [escala, height, puntos, width, parameters]);
-
+  
   return (
     <div>
       <canvas
@@ -150,10 +162,26 @@ const Trajecto: FC<propsTrajecto> = () => {
         ref={canvasTrajecto}
       />
       <div className='text-center justify-center content-center'>
-       <p> Altura maxima: <span className='text-cyan-400'>{alturaMaxima.toFixed(2)}m</span>,
-        Distancia Maxima: <span className='text-cyan-400'>{distanciaMaxima.toFixed(2)}m</span></p>
-       <p> Tiempo de vuelo: <span className='text-cyan-400'>{tiempoVuelo.toFixed(2)}s</span>, 
-        Velocidad Final X: <span  className='text-cyan-400' >{velocidadFinal.toFixed(2)}m/s</span></p>
+        <p>
+          Altura maxima:
+          <span className='text-cyan-400'>
+            {parseFloat(alturaMaxima.toString()).toFixed(2)}m
+          </span>,
+          Distancia Maxima:
+          <span className='text-cyan-400'>
+            {parseFloat(distanciaMaxima.toString()).toFixed(2)}m
+          </span>
+        </p>
+        <p>
+          Tiempo de vuelo:
+          <span className='text-cyan-400'>
+            {parseFloat(tiempoVuelo.toString()).toFixed(2)}s
+          </span>,
+          Velocidad Final X:
+          <span className='text-cyan-400' >
+            {parseFloat((velocidadFinal).toString()).toFixed(2)}m/s
+          </span>
+        </p>
       </div>
     </div>
   );
