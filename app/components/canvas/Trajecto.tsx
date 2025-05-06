@@ -177,7 +177,7 @@ const Trajecto: FC<propsTrajecto> = () => {
           <span className='text-cyan-400'>
             {parseFloat(tiempoVuelo.toString()).toFixed(2)}s
           </span>,
-          Velocidad Final X:
+          Velocidad Final:
           <span className='text-cyan-400' >
             {parseFloat((velocidadFinal).toString()).toFixed(2)}m/s
           </span>
