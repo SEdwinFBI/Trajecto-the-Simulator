@@ -36,7 +36,7 @@ const Parametros = () => {
       <div className='grid grid-cols-2 gap-3 text-center '>
         <InputComponent value={inputList.grade} captureValue={setInputList} label='Angulo de lanzamiento (θ)' simulatorKey={'grade'} type='number' />
         <InputComponent value={inputList.speed} captureValue={setInputList} label='Velocidad Inicial (m/s)' simulatorKey={'speed'} type='number' />
-        <InputComponent value={inputList.kg} captureValue={setInputList} label='Masa del objeto (kg)' simulatorKey={'kg'} type='number' />
+        <InputComponent value={inputList.kg} captureValue={setInputList} label='Tiempo (s) solo en angulo (0)' simulatorKey={'kg'} type='number' />
         {/* <InputComponent captureValue={setInputList} label='Altura Inicial (m)' simulatorKey={'heightMeters'} type='number' /> */}
       </div>
       <button
