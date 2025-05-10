@@ -22,8 +22,10 @@ const Home = () => {
       </div>
 
       <footer className='flex flex-col content-center justify-center text-center mt-5 text-xs' >
-      &copy; 2025 Trajecto by Edwin Baquiax. Todos los derechos reservados.
-         </footer>
+        &copy; 2025 Trajecto by Edwin Baquiax. Todos los derechos reservados.
+        <hr/>
+        <p>Carne: 1490-24-2366, Clase: A, Semestre: 3, Ingenieria en Sistemas de Informacion y Ciencias de la Computacion</p>
+      </footer>
     </section>
   )
 }
